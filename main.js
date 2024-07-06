@@ -69,7 +69,30 @@ function formValidCheck (author, title, numOfPages) {
 
 
 
-
+/*
 document.querySelector('.log').addEventListener('click', () => {
   console.log(myLibrary);
 })
+*/
+
+
+document.getElementById('add-book').addEventListener('click', () => {
+  openOverlay();
+
+})
+
+document.getElementById('overlay').addEventListener('click', () => {
+  closeOverlay();
+})
+
+
+function openOverlay () {
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('form-container').style.display = 'flex';
+
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('form-container').style.display = 'none';
+}
