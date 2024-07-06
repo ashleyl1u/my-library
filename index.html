@@ -7,6 +7,39 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+
+  <form class="form">
+    <legend>Add New Book</legend>
+    <li>
+      <ul>
+        <label for="author">Author</label>
+        <input type="text" id="author">
+        <h6 class="error-msg author-error"></h6>
+      </ul>
+
+      <ul>
+        <label for="title">Title</label>
+        <input type="text" id="title">
+        <h6 class="error-msg title-error"></h6>
+      </ul>
+
+      <ul>
+        <label for="numOfPages">Number of Pages</label>
+        <input type="number" id="numOfPages">
+        <h6 class="error-msg numOfPages-error"></h6>
+      </ul>
+
+      <ul>
+        <label for="readStatus">Read?</label>
+        <input type="checkbox" id="readStatus">
+      </ul>
+    </li>
+    
+    <button type="submit" class="submit">Submit</button>
+  </form>
+
+
+  <button class="log">Display</button>
   
   <script src="./main.js"></script>
 </body>
