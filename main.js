@@ -34,6 +34,9 @@ function addToLibrary(newBook){
 //resets form 
 function resetForm () {
   document.querySelector('.form').reset();
+  document.querySelectorAll('.error-msg').forEach((e) => {
+    e.textContent='';
+  })
 }
 
 //add an event listner to form 
@@ -69,11 +72,11 @@ function formValidCheck (author, title, numOfPages) {
 
 
 
-/*
+
 document.querySelector('.log').addEventListener('click', () => {
   console.log(myLibrary);
 })
-*/
+
 
 
 document.getElementById('add-book').addEventListener('click', () => {
