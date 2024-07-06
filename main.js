@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary = [new Book ('Ashley', '11', 428, false)];
 
 //constructor 
 function Book (author, title, numOfPages, readingStatus){
