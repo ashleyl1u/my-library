@@ -1,5 +1,6 @@
 let myLibrary = [];
 
+//constructor 
 function Book (author, title, numOfPages, readingStatus){
   this.author = author;
   this.title = title;
@@ -8,13 +9,8 @@ function Book (author, title, numOfPages, readingStatus){
 }
 
 
-
-
-
-
-
-
-
+//gets info of new book from html form 
+//will return an object if all inputs are valid, otherwise returns false
 function getNewBookInfo (){
   const author = document.getElementById('author').value;
   const title = document.getElementById('title').value;
@@ -28,17 +24,19 @@ function getNewBookInfo (){
   else{
     return false;
   }
-
-
-  
 }
 
-
+//adds a book object to myLibrary array 
 function addToLibrary(newBook){
   myLibrary.push(newBook);
 }
 
+//resets form 
+function resetForm () {
+  document.querySelector('.form').reset();
+}
 
+//add an event listner to form 
 document.querySelector('.form').addEventListener('submit', (e) =>{
   e.preventDefault();
 
@@ -46,12 +44,10 @@ document.querySelector('.form').addEventListener('submit', (e) =>{
   if(newBook !== false){
     addToLibrary(newBook);
     resetForm(); 
-    //document.querySelector('.form').submit();
-    
   }
-
 })
 
+//checks if form is valid or not 
 function formValidCheck (author, title, numOfPages) {
   let flag = true;
   if(author === '' ){
@@ -71,9 +67,7 @@ function formValidCheck (author, title, numOfPages) {
   return flag;
 }
 
-function resetForm () {
-  document.querySelector('.form').reset();
-}
+
 
 
 document.querySelector('.log').addEventListener('click', () => {
