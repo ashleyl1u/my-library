@@ -16,7 +16,7 @@ function getNewBookInfo (){
   const title = document.getElementById('title').value;
   const numOfPages = document.getElementById('numOfPages').value;
   const valid = formValidCheck (author, title, numOfPages);
-  const readStatus = document.getElementById('readStatus').value;
+  const readStatus = document.getElementById('read-status').value;
 
   if(valid){
     return new Book (author, title, numOfPages, readStatus);
@@ -29,6 +29,7 @@ function getNewBookInfo (){
 //adds a book object to myLibrary array 
 function addToLibrary(newBook){
   myLibrary.push(newBook);
+  renderBooks();
 }
 
 //resets form 
@@ -47,6 +48,7 @@ document.querySelector('.form').addEventListener('submit', (e) =>{
   if(newBook !== false){
     addToLibrary(newBook);
     resetForm(); 
+    closeOverlay();
   }
 })
 
@@ -105,7 +107,7 @@ renderBooks();
 function renderBooks (){
   let html = '';
   
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book,index) => {
     const statusHTML = getSelectedHtml(book);
     html += `
     <div class="book-card">
@@ -120,7 +122,7 @@ function renderBooks (){
       </div>
       
       
-      <button>remove</button>
+      <button class="remove" id=${index}>remove</button>
     </div>
     `
 
@@ -128,7 +130,16 @@ function renderBooks (){
 
   document.getElementById('book-container').innerHTML = html;
 
+  document.querySelectorAll('.remove').forEach((removeBtn) => {
+    removeBtn.addEventListener('click', () => {
+      removeBook(removeBtn.getAttribute('id'));
+    })
+  })
+  
 }
+
+
+
 
 function getSelectedHtml(book){
   const status = book.readStatus;
@@ -158,5 +169,14 @@ function getSelectedHtml(book){
   }
 
   return html;
+
+}
+
+
+
+
+function removeBook(index){
+  myLibrary.splice(index,1);
+  renderBooks();
 
 }

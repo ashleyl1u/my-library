@@ -93,7 +93,7 @@ body{
 
 #book-container{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 20px;
   padding: 10px 40px 10px 40px;;
 
