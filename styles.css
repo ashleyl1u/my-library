@@ -9,10 +9,14 @@
   color: red;
 }
 
-.header{
-  display: flex;
-  justify-content: center;
-  padding: 20px 30px;
+body{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.side{
+  grid-column: 1/2;
+  padding: 20px;
 }
 
 
@@ -23,6 +27,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  grid-column: 2/5;
 }
 
 .form{
@@ -55,19 +60,17 @@
   width: 100%;
 }
 
-.form .readStatus-container{
+.form .read-status-container{
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-.form #readStatus{
-  margin-left: 0px;
-  width: 15px;
-  height: 15px;
-  margin-left: 10px;
+.form #read-status{
+ padding: 0px 5px;
 }
 
-.readStatus-container label{
+.read-status-container label{
   font-size: 14px;
 }
 
@@ -88,3 +91,18 @@
   z-index: 1000;
 }
 
+#book-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 10px 40px 10px 40px;;
+
+}
+
+
+.book-card{
+  background-color: silver;
+  padding: 20px;
+  height: 200px;
+  border-radius: 20px;
+}

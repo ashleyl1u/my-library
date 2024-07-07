@@ -11,10 +11,7 @@
 </head>
 <body>
 
-  <div class="header">
-    <h1>My Library</h1>
-
-  </div>
+  
 
   <div id="form-container">
     <form class="form">
@@ -35,9 +32,15 @@
           <h6 class="error-msg numOfPages-error"></h6>
         </ul>
 
-        <ul class="readStatus-container">
-          <label for="readStatus">Read?</label>
-          <input type="checkbox" id="readStatus">
+        <ul class="read-status-container">
+          <label for="readStatus">Read Status: </label>
+
+          <select name="read-status" id="read-status">
+            <option value="unread" selected="selected">unread</option>
+            <option value="reading">reading</option>
+            <option value="read">read</option>
+          </select>
+
         </ul>
       </li>
       
@@ -47,17 +50,25 @@
   </div>
   <div id="overlay"></div>
 
-  <div>
+
+
+  <div class="side">
+    <h1>My Library</h1>
+    <h2>Total Books: </h2>
+    <h2>Read:</h2>
+    <h2>Reading:</h2>
+    <h2>Unread:</h2>
     <button id="add-book">+add book</button>
+    <button class="log">display </button>
   </div>
 
-  <button class="log">display </button>
+  
   
   
 
 
-  <div class="book-container">
-    asda
+  <div id="book-container">
+
   </div>
 
   

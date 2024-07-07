@@ -1,11 +1,11 @@
-let myLibrary = [new Book ('Ashley', '11', 428, false)];
+let myLibrary = [new Book ('Suzanne Collins', 'The Hunger Games', 428, 'read'), new Book (' J.K. Rowling', 'Harry Potter and the Order of the Phoenix ', 800, 'reading'), new Book ('Jane Austen', 'Pride and Prejudice', 900, 'unread')];
 
 //constructor 
-function Book (author, title, numOfPages, readingStatus){
+function Book (author, title, numOfPages, readStatus){
   this.author = author;
   this.title = title;
   this.numOfPages = numOfPages;
-  this.readingStatus = readingStatus;
+  this.readStatus = readStatus;
 }
 
 
@@ -16,7 +16,7 @@ function getNewBookInfo (){
   const title = document.getElementById('title').value;
   const numOfPages = document.getElementById('numOfPages').value;
   const valid = formValidCheck (author, title, numOfPages);
-  const readStatus = document.getElementById('readStatus').checked;
+  const readStatus = document.getElementById('readStatus').value;
 
   if(valid){
     return new Book (author, title, numOfPages, readStatus);
@@ -78,7 +78,7 @@ document.querySelector('.log').addEventListener('click', () => {
 })
 
 
-
+//This section is for opening and closing the overlat alert
 document.getElementById('add-book').addEventListener('click', () => {
   openOverlay();
 
@@ -98,4 +98,65 @@ function openOverlay () {
 function closeOverlay() {
   document.getElementById('overlay').style.display = 'none';
   document.getElementById('form-container').style.display = 'none';
+}
+
+
+renderBooks();
+function renderBooks (){
+  let html = '';
+  
+  myLibrary.forEach((book) => {
+    const statusHTML = getSelectedHtml(book);
+    html += `
+    <div class="book-card">
+      <h3>${book.title}</h3>
+      <h4>${book.author}</h4>
+      <h5>${book.numOfPages} pages</h5>
+      <div>
+        <h5>Status</h5>
+        <select name="read-status" id="read-status">
+          ${statusHTML}
+        </select>
+      </div>
+      
+      
+      <button>remove</button>
+    </div>
+    `
+
+  });
+
+  document.getElementById('book-container').innerHTML = html;
+
+}
+
+function getSelectedHtml(book){
+  const status = book.readStatus;
+  let html =``;
+  if(status === 'unread'){
+    html = `
+      <option value="unread" selected="selected">unread</option>
+      <option value="reading">reading</option>
+      <option value="read">read</option>
+    `
+  }
+
+  if (status === 'reading'){
+    html = `
+      <option value="unread" >unread</option>
+      <option value="reading" selected="selected">reading</option>
+      <option value="read">read</option>
+    `
+  }
+
+  if (status === 'read'){
+    html = `
+      <option value="unread" >unread</option>
+      <option value="reading">reading</option>
+      <option value="read" selected="selected">read</option>
+    `
+  }
+
+  return html;
+
 }
