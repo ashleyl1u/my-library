@@ -1,5 +1,48 @@
 let myLibrary = [new Book ('Suzanne Collins', 'The Hunger Games', 428, 'read'), new Book (' J.K. Rowling', 'Harry Potter and the Order of the Phoenix ', 800, 'reading'), new Book ('Jane Austen', 'Pride and Prejudice', 900, 'unread')];
 
+let bookLog = {
+  totalBooks: 0,
+  read: 0,
+  reading: 0,
+  unread: 0
+}
+
+updateBookLog();
+function updateBookLog(){
+  let read =0;
+  let reading =0;
+  let unread=0;
+  myLibrary.forEach((book) => {
+    if(book.readStatus === 'read'){
+      read++;
+    }
+    if(book.readStatus === 'reading'){
+      reading++;
+    }
+    if(book.readStatus === 'unread'){
+      unread++;
+    }
+  })
+
+  bookLog.totalBooks= myLibrary.length;
+  bookLog.read =read;
+  bookLog.reading =reading;
+  bookLog.unread = unread;
+  renderBookLog();
+}
+
+
+function renderBookLog(){
+  document.querySelector('.bookLog').innerHTML=`
+      <h2>Total Books: ${bookLog.totalBooks}</h2>
+      <h2>Read: ${bookLog.read}</h2>
+      <h2>Reading: ${bookLog.reading}</h2>
+      <h2>Unread: ${bookLog.unread}</h2>
+  `
+}
+
+
+
 //constructor 
 function Book (author, title, numOfPages, readStatus){
   this.author = author;
@@ -30,6 +73,7 @@ function getNewBookInfo (){
 function addToLibrary(newBook){
   myLibrary.push(newBook);
   renderBooks();
+  updateBookLog();
 }
 
 //resets form 
@@ -173,10 +217,8 @@ function getSelectedHtml(book){
 }
 
 
-
-
 function removeBook(index){
   myLibrary.splice(index,1);
   renderBooks();
-
+  updateBookLog();
 }
