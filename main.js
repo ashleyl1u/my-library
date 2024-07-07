@@ -154,19 +154,19 @@ function renderBooks (){
   myLibrary.forEach((book,index) => {
     const statusHTML = getSelectedHtml(book);
     html += `
-    <div class="book-card">
+    <div class="book-card" id=${index}>
       <h3>${book.title}</h3>
       <h4>${book.author}</h4>
       <h5>${book.numOfPages} pages</h5>
       <div>
         <h5>Status</h5>
-        <select name="read-status" id="read-status">
+        <select name="read-status"  class="read-status">
           ${statusHTML}
         </select>
       </div>
       
       
-      <button class="remove" id=${index}>remove</button>
+      <button class="remove" >remove</button>
     </div>
     `
 
@@ -174,14 +174,31 @@ function renderBooks (){
 
   document.getElementById('book-container').innerHTML = html;
 
-  document.querySelectorAll('.remove').forEach((removeBtn) => {
-    removeBtn.addEventListener('click', () => {
-      removeBook(removeBtn.getAttribute('id'));
-    })
-  })
+  addListenerToRemoveBtn();
+
+  addListenerToReadStatus(); 
+  
   
 }
 
+function addListenerToRemoveBtn(){
+  document.querySelectorAll('.remove').forEach((removeBtn) => {
+    removeBtn.addEventListener('click', () => {
+      removeBook(removeBtn.parentElement.getAttribute('id'));
+    });
+  });
+}
+
+
+function addListenerToReadStatus(){
+  document.querySelectorAll('.read-status').forEach((dropdown) => {
+    dropdown.addEventListener('change', () => {
+      updateReadStatus(dropdown.parentElement.parentElement.getAttribute('id'), dropdown.value);
+      
+      
+    });
+  });
+}
 
 
 
@@ -221,4 +238,11 @@ function removeBook(index){
   myLibrary.splice(index,1);
   renderBooks();
   updateBookLog();
+}
+
+
+function updateReadStatus(index, newStatus){
+  myLibrary[index].readStatus = newStatus;
+  updateBookLog();
+  
 }
