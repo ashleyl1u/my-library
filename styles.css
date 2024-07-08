@@ -2,7 +2,22 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", "Lora", "Poppins", sans-serif;
+  color: var(--font-color);
+}
+
+:root{
+  --main-color: #292f35;
+  --side-color: #F8F9FA;
+  --font-color: #212529;
+  --h5-color: #495057;
+  --h4-color: #343A40;
+  --select-color: #6C757D;
+  --hover-color: #E9ECEF;
+  --status-color: #495057;
+  --total-color: #343A40;
+  --pre-focus-color: #ADB5BD;
+  --focus-color: #212529;
 }
 
 .error-msg{
@@ -12,12 +27,23 @@
 body{
   display: grid;
   grid-template-columns: 1fr 3fr;
+  height: 100vh;
+  
 }
 
-.side{
-  grid-column: 1/2;
-  padding: 20px;
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+   /* Ensure it's above other content */
+  z-index: 1000;
 }
+
+
 
 
 #form-container{
@@ -34,7 +60,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 200px;
+  width: 300px;
   gap: 10px;
   background-color: white;
   padding: 30px;
@@ -47,27 +73,38 @@ body{
 .form li{
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  width: 300px;
 }
 
 .form input{
-  padding: 5px 10px;
-  width: 175px;
+  padding: 8px 0px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--pre-focus-color);
+}
+
+.form input:focus{
+  outline: none;
+  border-bottom: 1px solid var(--focus-color);
 }
 
 .form button{
   padding: 5px 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .form .read-status-container{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px 0px;
 }
 
 .form #read-status{
  padding: 0px 5px;
+ border: none;
 }
 
 .read-status-container label{
@@ -79,30 +116,161 @@ body{
   font-weight: 600;
 }
 
-#overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-   /* Ensure it's above other content */
-  z-index: 1000;
+.form .submit{
+  border: none;
+  padding: 8px 0px;
 }
+
+
+
 
 #book-container{
   display: grid;
+  
+  align-items: start;
   grid-template-columns: repeat(auto-fit, 300px);
-  gap: 20px;
-  padding: 10px 40px 10px 40px;;
+  grid-template-rows: repeat(auto-fit, 240px);
+  gap: 30px;
+  padding: 30px;
+  background-color: var(--main-color);
+  overflow: scroll;
 
 }
 
 
 .book-card{
-  background-color: silver;
+  background-color: white;
   padding: 20px;
   height: 200px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-card h3{
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.book-card h4{
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--h4-color);
+}
+
+
+
+.book-card .bottom{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: end;
+
+}
+
+.book-card h5{
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 2px;
+  color: var(--h5-color);
+}
+
+.book-card select{
+  font-size: 14px;
+  font-weight: 500;
+  width: 75px;
+  border: none;
+  color: var(--select-color);
+  
+
+}
+
+.book-card label{
+  font-size: 12px;
+}
+
+.book-card .status{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.book-card .container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+}
+
+.book-card .remove {
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: white;
+  width: 30px;
+  height: auto;
+}
+
+.book-card .remove:hover{
+  background-color: var(--hover-color);
+}
+
+
+
+.side{
+  grid-column: 1/2;
+  padding: 30px;
+  background-color: var(--side-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.side h1{
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 15px;;
+}
+
+.side .total{
+  font-size: 20px; 
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: var(--total-color);
+}
+
+.side .read-status h2{
+  font-size: 18px; 
+  font-weight: 700;
+  color: var(--status-color);
+  margin-top: 5px;
+}
+
+.book-log{
+  margin-bottom: 15px;
+}
+
+.side #add-book{
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: var(--side-color);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.side #add-book:hover {
+  background-color: var(--hover-color);
+  
 }

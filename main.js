@@ -33,11 +33,14 @@ function updateBookLog(){
 
 
 function renderBookLog(){
-  document.querySelector('.bookLog').innerHTML=`
-      <h2>Total Books: ${bookLog.totalBooks}</h2>
-      <h2>Read: ${bookLog.read}</h2>
-      <h2>Reading: ${bookLog.reading}</h2>
-      <h2>Unread: ${bookLog.unread}</h2>
+  document.querySelector('.book-log').innerHTML=`
+      <h2 class="total" >Total Books: ${bookLog.totalBooks}</h2>
+      <div class="read-status">
+        <h2>read: ${bookLog.read}</h2>
+        <h2>reading: ${bookLog.reading}</h2>
+        <h2>unread: ${bookLog.unread}</h2>
+      </div>
+      
   `
 }
 
@@ -118,10 +121,10 @@ function formValidCheck (author, title, numOfPages) {
 
 
 
-
+/* <button class="log">display </button>
 document.querySelector('.log').addEventListener('click', () => {
   console.log(myLibrary);
-})
+})*/
 
 
 //This section is for opening and closing the overlat alert
@@ -155,18 +158,30 @@ function renderBooks (){
     const statusHTML = getSelectedHtml(book);
     html += `
     <div class="book-card" id=${index}>
-      <h3>${book.title}</h3>
-      <h4>${book.author}</h4>
-      <h5>${book.numOfPages} pages</h5>
-      <div>
-        <h5>Status</h5>
-        <select name="read-status"  class="read-status">
-          ${statusHTML}
-        </select>
+      <div class="top">
+        <h3>${book.title}</h3>
+        <h4>By ${book.author}</h4>
+      </div>
+      <div class="bottom">
+        <div class="container">
+          <div class="status">
+            <h5>Status: </h5>
+            <select name="read-status"  class="read-status" >
+              ${statusHTML}
+            </select>
+          </div>
+          <h5>${book.numOfPages} pages</h5>
+        </div>
+        
+       
+          <button class="remove" >
+          <img src="./trashcan.svg" alt="">
+          </button>
+          
+        
+        
       </div>
       
-      
-      <button class="remove" >remove</button>
     </div>
     `
 
@@ -193,7 +208,7 @@ function addListenerToRemoveBtn(){
 function addListenerToReadStatus(){
   document.querySelectorAll('.read-status').forEach((dropdown) => {
     dropdown.addEventListener('change', () => {
-      updateReadStatus(dropdown.parentElement.parentElement.getAttribute('id'), dropdown.value);
+      updateReadStatus(dropdown.parentElement.parentElement.parentElement.parentElement.getAttribute('id'), dropdown.value);
       
       
     });
