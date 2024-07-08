@@ -199,7 +199,7 @@ function renderBooks (){
 function addListenerToRemoveBtn(){
   document.querySelectorAll('.remove').forEach((removeBtn) => {
     removeBtn.addEventListener('click', () => {
-      removeBook(removeBtn.parentElement.getAttribute('id'));
+      removeBook(removeBtn.parentElement.parentElement.getAttribute('id'));
     });
   });
 }
