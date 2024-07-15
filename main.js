@@ -1,3 +1,34 @@
+class Book {
+  constructor(author, title, numOfPages, readStatus){
+    this.author = author;
+    this.title = title;
+    this.numOfPages = numOfPages;
+    this.readStatus = readStatus;
+  }
+
+  getReadStatus() {
+    return this.readStatus;
+  }
+
+  getTitle(){
+    return this.title;
+  }
+
+  getAuthor() {
+    return this.author;
+  }
+
+  getNumOfPages () {
+    return this.numOfPages;
+  }
+
+  setReadStatus(newReadStatus) {
+    this.readStatus = newReadStatus;
+  }
+
+}
+
+
 let myLibrary = [new Book ('Suzanne Collins', 'The Hunger Games', 428, 'read'), new Book (' J.K. Rowling', 'Harry Potter and the Order of the Phoenix ', 800, 'reading'), new Book ('Jane Austen', 'Pride and Prejudice', 900, 'unread')];
 
 let bookLog = {
@@ -13,13 +44,13 @@ function updateBookLog(){
   let reading =0;
   let unread=0;
   myLibrary.forEach((book) => {
-    if(book.readStatus === 'read'){
+    if(book.getReadStatus() === 'read'){
       read++;
     }
-    if(book.readStatus === 'reading'){
+    if(book.getReadStatus() === 'reading'){
       reading++;
     }
-    if(book.readStatus === 'unread'){
+    if(book.getReadStatus() === 'unread'){
       unread++;
     }
   })
@@ -46,13 +77,10 @@ function renderBookLog(){
 
 
 
-//constructor 
-function Book (author, title, numOfPages, readStatus){
-  this.author = author;
-  this.title = title;
-  this.numOfPages = numOfPages;
-  this.readStatus = readStatus;
-}
+ 
+
+
+
 
 
 //gets info of new book from html form 
@@ -121,10 +149,6 @@ function formValidCheck (author, title, numOfPages) {
 
 
 
-/* <button class="log">display </button>
-document.querySelector('.log').addEventListener('click', () => {
-  console.log(myLibrary);
-})*/
 
 
 //This section is for opening and closing the overlat alert
@@ -159,8 +183,8 @@ function renderBooks (){
     html += `
     <div class="book-card" id=${index}>
       <div class="top">
-        <h3>${book.title}</h3>
-        <h4>By ${book.author}</h4>
+        <h3>${book.getTitle()}</h3>
+        <h4>By ${book.getAuthor()}</h4>
       </div>
       <div class="bottom">
         <div class="container">
@@ -170,7 +194,7 @@ function renderBooks (){
               ${statusHTML}
             </select>
           </div>
-          <h5>${book.numOfPages} pages</h5>
+          <h5>${book.getNumOfPages()} pages</h5>
         </div>
         
        
@@ -218,7 +242,7 @@ function addListenerToReadStatus(){
 
 
 function getSelectedHtml(book){
-  const status = book.readStatus;
+  const status = book.getReadStatus();
   let html =``;
   if(status === 'unread'){
     html = `
@@ -257,7 +281,7 @@ function removeBook(index){
 
 
 function updateReadStatus(index, newStatus){
-  myLibrary[index].readStatus = newStatus;
+  myLibrary[index].setReadStatus(newStatus);
   updateBookLog();
   
 }
